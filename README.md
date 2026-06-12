@@ -1,292 +1,448 @@
-# ModernStore - Complete E-Commerce Website
+# 🛒 ModernStore - Full Stack E-Commerce Website
 
-A fully functional, production-ready e-commerce platform built with Django. Features user authentication, product catalog, shopping cart, order processing, dark mode, and responsive design.
+A modern and responsive full-stack E-Commerce web application built with Django. Users can browse products, search by category, manage their shopping cart, place orders, track order history, cancel orders, and manage their profile.
 
-## ✨ Features
+---
 
-### User System
-- User registration with validation
-- Secure login/logout
-- Password validation (Django defaults)
-- User profile page with editable details
-- Order history for each user
+## 🌐 Live Demo
 
-### Product Management
-- Product listings with pagination
-- Product detail pages with images
-- Category-based filtering
-- Search by product name or description
-- Stock quantity tracking
+Coming Soon
 
-### Shopping Cart
-- Add/remove items without page refresh (AJAX)
-- Update quantities dynamically
-- Real-time cart counter update
-- Toast notifications for actions
-- Cart total calculation
+---
 
-### Order Processing
-- Secure checkout with shipping form
-- Order summary before placement
-- Order status tracking (Pending, Processing, Shipped, Delivered, Cancelled)
-- Order history with detailed views
-- Automatic stock deduction after order
+## 📸 Screenshots
 
-### User Experience
-- **Dark Mode Toggle** with localStorage persistence
-- Fully responsive design (Mobile, Tablet, Desktop)
-- Modern product cards with hover effects
-- Smooth animations
-- Empty cart illustration
-- Professional color scheme
+### 🏠 Home Page
+- Product listing
+- Featured products
+- Search functionality
+- Category navigation
 
-### Admin Panel
-- Full CRUD for Products, Categories, Orders
-- Image preview in product list
-- Search and filters
-- Order status management
+### 🛍 Product Details
+- Product image
+- Description
+- Price
+- Stock information
+- Add to Cart
 
-## 🛠️ Tech Stack
+### 🛒 Shopping Cart
+- Update quantity
+- Remove products
+- Dynamic total calculation
 
-| Layer | Technology |
-|-------|------------|
-| Backend | Django 4.2 |
-| Database | SQLite (development) / PostgreSQL (production) |
-| Frontend | HTML5, CSS3, Vanilla JavaScript |
-| Icons | Font Awesome 6 |
-| Images | Pillow (Django ImageField) |
+### 📦 Order Management
+- Place orders
+- View order history
+- Cancel orders
+- Delete cancelled orders
 
-## 📁 Project Structure
+### 👤 User Profile
+- Update personal information
+- Manage address and contact details
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication System
+
+- User Registration
+- User Login
+- User Logout
+- Secure Password Validation
+- User Profile Management
+
+---
+
+## 🛍 Product Management
+
+- Product Categories
+- Product Images
+- Product Descriptions
+- Product Pricing
+- Stock Management
+- Product Detail Pages
+
+---
+
+## 🔍 Search & Filtering
+
+- Search Products by Name
+- Search Products by Description
+- Category-Based Filtering
+
+---
+
+## 🛒 Shopping Cart
+
+- Add Products to Cart
+- Remove Products from Cart
+- Update Product Quantity
+- Real-Time Cart Total Calculation
+- AJAX Cart Updates
+
+---
+
+## 💳 Checkout System
+
+- Shipping Information Form
+- Order Creation
+- Automatic Cart Clearing After Checkout
+- Order Summary
+
+---
+
+## 📦 Order Management
+
+- View Order History
+- View Individual Order Details
+- Cancel Pending Orders
+- Delete Cancelled Orders
+- Automatic Stock Restoration on Cancellation
+
+---
+
+## 🎨 UI/UX Features
+
+- Responsive Design
+- Mobile Friendly Layout
+- Dark Mode Support
+- Toast Notifications
+- Modern Interface
+- Clean Navigation
+
+---
+
+## 📱 Responsive Design
+
+The application is fully responsive and works on:
+
+- Desktop 💻
+- Laptop 🖥️
+- Tablet 📱
+- Mobile 📲
+
+---
+
+# 🏗 Tech Stack
+
+## Backend
+
+- Django 4.2
+- Python 3
+
+## Frontend
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+
+## Database
+
+- SQLite3
+
+## Authentication
+
+- Django Authentication System
+
+## Media Handling
+
+- Pillow
+
+---
+
+# 📂 Project Structure
+
+```text
 ecommerce/
+│
+├── ecommerce/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│
+├── store/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── urls.py
+│   ├── signals.py
+│   ├── context_processors.py
+│
+├── templates/
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│
+├── media/
+│
 ├── manage.py
-├── requirements.txt
-├── README.md
-├── ecommerce/ # Project settings
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
-├── store/ # Main app
-│ ├── models.py # Category, Product, Cart, Order
-│ ├── views.py # Class-based & function-based views
-│ ├── admin.py # Admin customizations
-│ ├── forms.py # Registration, Profile, Checkout forms
-│ ├── urls.py # App routes
-│ ├── signals.py # Auto-create profile & cart on user signup
-│ ├── context_processors.py # Categories & cart count for all templates
-│ ├── templates/
-│ │ ├── base.html
-│ │ ├── registration/
-│ │ │ ├── login.html
-│ │ │ └── register.html
-│ │ └── store/
-│ │ ├── home.html
-│ │ ├── product_list.html
-│ │ ├── product_detail.html
-│ │ ├── cart.html
-│ │ ├── checkout.html
-│ │ ├── order_history.html
-│ │ ├── order_detail.html
-│ │ └── profile.html
-│ └── static/
-│ ├── css/main.css
-│ └── js/
-│ ├── main.js
-│ └── cart.js
-├── static/ # Collected static files (production)
-└── media/ # User-uploaded product images
+│
+└── requirements.txt
+```
 
-text
+---
 
-## 🚀 Installation & Setup
+# 🗄 Database Models
 
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-- Virtual environment (recommended)
+## Category
 
-### Step 1: Clone or Download
-Extract the project to a folder named `ecommerce`.
+- Name
+- Slug
+- Created Date
 
-### Step 2: Create Virtual Environment
+---
+
+## Product
+
+- Category
+- Name
+- Slug
+- Image
+- Description
+- Price
+- Stock
+- Created Date
+
+---
+
+## Profile
+
+- User
+- Phone
+- Address
+- City
+- Postal Code
+
+---
+
+## Cart
+
+- User
+- Created Date
+- Updated Date
+
+---
+
+## CartItem
+
+- Cart
+- Product
+- Quantity
+
+---
+
+## Order
+
+- User
+- Full Name
+- Address
+- City
+- Postal Code
+- Phone
+- Total Amount
+- Status
+- Created Date
+
+---
+
+## OrderItem
+
+- Order
+- Product
+- Quantity
+- Price
+
+---
+
+# 🚀 Installation Guide
+
+## 1️⃣ Clone Repository
+
 ```bash
-# Windows
+git clone https://github.com/yourusername/modernstore.git
+cd modernstore
+```
+
+---
+
+## 2️⃣ Create Virtual Environment
+
+### Windows
+
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
-# macOS/Linux
+### Linux / Mac
+
+```bash
 python3 -m venv venv
 source venv/bin/activate
-Step 3: Install Dependencies
-bash
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
-Step 4: Apply Migrations
-bash
+```
+
+---
+
+## 4️⃣ Run Migrations
+
+```bash
 python manage.py makemigrations
 python manage.py migrate
-Step 5: Create Superuser (Admin)
-bash
+```
+
+---
+
+## 5️⃣ Create Superuser
+
+```bash
 python manage.py createsuperuser
-Follow the prompts to set username, email, and password.
+```
 
-Step 6: Run Development Server
-bash
+---
+
+## 6️⃣ Start Development Server
+
+```bash
 python manage.py runserver
-Open your browser at http://127.0.0.1:8000
+```
 
-Step 7: Add Sample Products (Optional)
-Visit http://127.0.0.1:8000/admin
+---
 
-Log in with your superuser credentials
+## 7️⃣ Open Browser
 
-Click "Add" under Categories → create categories (e.g., Electronics, Clothing)
+```text
+http://127.0.0.1:8000/
+```
 
-Click "Add" under Products → fill details, upload images, set price and stock
+---
 
-🖥️ Usage Guide
-For Customers
-Register a new account or Login.
+# 🔑 Admin Panel
 
-Browse products via Home or Shop page.
+Access Django Admin:
 
-Use Search bar or Category filters to find products.
+```text
+http://127.0.0.1:8000/admin/
+```
 
-Click View Details to see full product info.
+Admin can:
 
-Click Add to Cart – a toast notification confirms.
+- Add Categories
+- Add Products
+- Update Stock
+- Manage Orders
+- Manage Users
 
-Go to Cart page to update quantities or remove items.
+---
 
-Proceed to Checkout, fill shipping details, and Place Order.
+# 🌙 Dark Mode
 
-View all orders in My Orders section.
+The application includes Dark Mode support.
 
-Update personal info in Profile page.
+Features:
 
-Toggle Dark Mode using the moon icon in navbar.
+- Theme Toggle Button
+- Theme Persistence
+- Smooth Theme Switching
 
-For Admin (via /admin)
-Products: Add, edit, delete products. Stock and price editable directly from list view.
+---
 
-Categories: Manage product categories.
+# 📦 Order Workflow
 
-Orders: Update order status (Pending → Processing → Shipped → Delivered).
+```text
+Browse Products
+      ↓
+Add To Cart
+      ↓
+Update Cart
+      ↓
+Checkout
+      ↓
+Order Created
+      ↓
+Order History
+      ↓
+Cancel Order (Optional)
+      ↓
+Delete Cancelled Order (Optional)
+```
 
-Users: View registered users (profiles automatically created).
+---
 
-Cart/Items: Monitor active carts (read-only).
+# 🛡 Security Features
 
-🌙 Dark Mode
-Click the moon icon in the top-right corner.
+- CSRF Protection
+- Django Authentication
+- Login Required Views
+- Secure Password Validation
+- Protected Order Access
+- User-Specific Data Access
 
-Preference is saved in localStorage and persists across sessions.
+---
 
-Smooth transition between light and dark themes.
+# 📈 Future Improvements
 
-📱 Responsive Design
-Mobile: Stacked navigation, full-width search, single-column product grid.
+- Wishlist System
+- Product Reviews
+- Product Ratings
+- Payment Gateway Integration
+- Email Notifications
+- Coupon System
+- Order Tracking
+- Product Recommendations
+- User Profile Pictures
+- Multiple Product Images
 
-Tablet: Two-column product grid, adjusted spacing.
+---
 
-Desktop: Multi-column grid, sticky navbar, side-by-side checkout.
+# 🎯 Learning Outcomes
 
-🔒 Security Features
-CSRF protection on all POST forms.
+This project demonstrates:
 
-Login required for cart, checkout, profile, and orders.
+- Django Models
+- Django Views
+- Django Forms
+- Authentication System
+- CRUD Operations
+- AJAX Requests
+- Database Relationships
+- Responsive Design
+- Full Stack Development
+- Deployment Ready Architecture
 
-Password validation (minimum length, not too common, not entirely numeric).
+---
 
-Order items linked to authenticated user; users cannot view others' orders.
+# 👨‍💻 Author
 
-Stock validation prevents over-purchasing.
+**Maadesh**
 
-🧪 Testing the Application
-After setup, test these flows:
+Full Stack Developer (Learning)
 
-Registration → http://127.0.0.1:8000/register/
+Built as a Full Stack Django E-Commerce Project for internship and portfolio purposes.
 
-Login → http://127.0.0.1:8000/login/
+---
 
-Product browsing → http://127.0.0.1:8000/products/
+# ⭐ Support
 
-Add to cart – open browser console to see AJAX responses.
+If you found this project useful:
 
-Checkout – after adding items.
+⭐ Star the repository
 
-Order history – after placing an order.
+🍴 Fork the repository
 
-🚢 Deployment
-Deploy to Render (Recommended)
-Push this project to a GitHub repository.
+📢 Share with others
 
-Create a new Web Service on Render.
+---
 
-Connect your repository.
+# 📄 License
 
-Set:
-
-Build Command: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
-
-Start Command: gunicorn ecommerce.wsgi:application
-
-Add environment variables:
-
-SECRET_KEY (generate a new one)
-
-DEBUG=False
-
-ALLOWED_HOSTS=.onrender.com
-
-(Optional) Use Cloudinary for media files or switch to PostgreSQL.
-
-Deploy to Railway
-Similar steps: connect GitHub repo, set start command to gunicorn ecommerce.wsgi:application, add environment variables.
-
-Deploy to PythonAnywhere
-Upload files (or use Git).
-
-Set up virtual environment, install requirements.
-
-Configure ALLOWED_HOSTS and static files.
-
-Set up a web app with WSGI pointing to ecommerce.wsgi.
-
-Production Checklist
-Set DEBUG = False
-
-Generate a new SECRET_KEY
-
-Configure ALLOWED_HOSTS
-
-Switch to PostgreSQL (add psycopg2-binary to requirements)
-
-Set up static file serving via WhiteNoise or CDN
-
-Use environment variables for sensitive data
-
-Configure media storage (e.g., AWS S3, Cloudinary)
-
-📦 Database Schema
-Model	Fields
-Category	name, slug
-Product	category, name, slug, image, description, price, stock
-Profile	user (OneToOne), phone, address, city, postal_code
-Cart	user (OneToOne)
-CartItem	cart, product, quantity
-Order	user, full_name, address, city, postal_code, phone, total_amount, status, created_at
-OrderItem	order, product, quantity, price
-🐛 Troubleshooting
-Issue	Solution
-No module named 'store'	Run python manage.py makemigrations store
-Images not loading	Ensure MEDIA_URL and MEDIA_ROOT are set. Run python manage.py runserver (development serves media).
-AJAX add to cart fails	Check browser console for CSRF errors. Ensure you're logged in.
-Dark mode not saving	Clear localStorage or check console for JavaScript errors.
-Cart count not updating	Verify cart_count context processor is in settings.py TEMPLATES context_processors.
-🤝 Contributing
-This project is for portfolio and educational purposes. Feel free to fork and enhance.
-
-📄 License
-MIT License – free to use, modify, and distribute with attribution.
-
-📧 Support
-For issues, create a GitHub issue or check Django documentation.
+This project is created for educational and portfolio purposes.
