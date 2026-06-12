@@ -1,0 +1,18 @@
+{# ecommerce/templates/store/profile.html #}
+{% extends 'base.html' %}
+
+{% block title %}My Profile - ModernStore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>My Profile</h1>
+    <form method="post" style="max-width: 600px; margin: 0 auto;">
+        {% csrf_token %}
+        <h3>Account Information</h3>
+        {{ user_form.as_p }}
+        <h3>Profile Information</h3>
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+{% endblock %}

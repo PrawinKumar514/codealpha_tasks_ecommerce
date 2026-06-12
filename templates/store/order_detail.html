@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Order #{{ order.id }} - ModernStore{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Order #{{ order.id }}</h1>
+
+    <p>
+        Status:
+        <strong>{{ order.get_status_display }}</strong>
+    </p>
+
+    <p>
+        Placed on:
+        {{ order.created_at|date:"F j, Y" }}
+    </p>
+
+    <h3>Shipping Information</h3>
+
+    <p>
+        {{ order.full_name }}<br>
+        {{ order.address }}<br>
+        {{ order.city }}, {{ order.postal_code }}<br>
+        Phone: {{ order.phone }}
+    </p>
+
+    <h3>Items</h3>
+
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>₹{{ item.price }}</td>
+                <td>₹{{ item.get_total_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <strong>Total</strong>
+                </td>
+                <td>
+                    <strong>₹{{ order.total_amount }}</strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+
+        <a href="{% url 'store:order_history' %}"
+           class="btn btn-primary"
+           style="width:170px;">
+            Back to Orders
+        </a>
+
+        {% if order.status == 'pending' %}
+        <form method="POST"
+              action="{% url 'store:cancel_order' order.id %}"
+              style="margin:0;">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="btn btn-danger"
+                    style="width:170px;"
+                    onclick="return confirm('Are you sure you want to cancel this order?');">
+                Cancel Order
+            </button>
+
+        </form>
+        {% endif %}
+
+        {% if order.status == 'cancelled' %}
+        <form method="POST"
+              action="{% url 'store:delete_order' order.id %}"
+              style="margin:0;"
+              onsubmit="return confirm('Delete this order permanently?');">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="btn btn-danger"
+                    style="width:170px;">
+                Delete Order
+            </button>
+
+        </form>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{# ecommerce/templates/store/home.html #}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - ModernStore{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to ModernStore</h1>
+    <p>Discover amazing products at unbeatable prices</p>
+</div>
+
+<div class="container">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+        {% for product in featured_products %}
+        <div class="product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200?text=No+Image" class="product-image">
+            {% endif %}
+            <div class="product-info">
+                <h3 class="product-title">{{ product.name }}</h3>
+                <p class="product-price">₹{{ product.price }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">View Details</a>
+                {% if user.is_authenticated and product.stock > 0 %}
+                <button class="btn btn-outline add-to-cart-btn" data-product-id="{{ product.id }}">Add to Cart</button>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No products available.</p>
+        {% endfor %}
+    </div>
+    
+    <h2>Shop by Category</h2>
+    <div class="product-grid">
+        {% for category in categories %}
+        <div class="product-card" style="text-align: center; padding: 2rem;">
+            <h3>{{ category.name }}</h3>
+            <a href="{% url 'store:product_list_by_category' category.slug %}" class="btn btn-primary">Browse</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{# ecommerce/templates/store/checkout.html #}
+{% extends 'base.html' %}
+
+{% block title %}Checkout - ModernStore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Checkout</h1>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <div>
+            <h3>Order Summary</h3>
+            {% for item in cart.items.all %}
+            <p>{{ item.quantity }} x {{ item.product.name }}: ₹{{ item.get_total_price }}</p>
+            {% endfor %}
+            <hr>
+            <h4>Total: ₹{{ cart.get_total_price }}</h4>
+        </div>
+        <div>
+            <h3>Shipping Details</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

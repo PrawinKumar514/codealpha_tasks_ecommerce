@@ -1,0 +1,54 @@
+{# ecommerce/templates/store/product_list.html #}
+{% extends 'base.html' %}
+
+{% block title %}Products - ModernStore{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>All Products</h1>
+    
+    <div class="category-filter">
+        <a href="{% url 'store:product_list' %}" class="btn btn-outline">All</a>
+        {% for category in categories %}
+        <a href="{% url 'store:product_list_by_category' category.slug %}" class="btn btn-outline">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+    
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200?text=No+Image" class="product-image">
+            {% endif %}
+            <div class="product-info">
+                <h3 class="product-title">{{ product.name }}</h3>
+                <p class="product-price">₹{{ product.price }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">View Details</a>
+                {% if user.is_authenticated and product.stock > 0 %}
+                <button class="btn btn-outline add-to-cart-btn" data-product-id="{{ product.id }}">Add to Cart</button>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No products found.</p>
+        {% endfor %}
+    </div>
+    
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

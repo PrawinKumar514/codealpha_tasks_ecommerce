@@ -1,0 +1,16 @@
+{# ecommerce/templates/registration/register.html #}
+{% extends 'base.html' %}
+
+{% block title %}Register - ModernStore{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px; margin: 2rem auto;">
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+{% endblock %}

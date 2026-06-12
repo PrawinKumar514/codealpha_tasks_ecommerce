@@ -1,0 +1,85 @@
+{# ecommerce/templates/base.html #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ModernStore{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'store:home' %}" class="logo">ModernStore</a>
+
+            <form class="search-bar" action="{% url 'store:product_list' %}" method="get">
+                <input type="text" name="search" placeholder="Search products..." value="{{ search_query }}">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="nav-links">
+                <a href="{% url 'store:home' %}">Home</a>
+                <a href="{% url 'store:product_list' %}">Shop</a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'store:order_history' %}">Orders</a>
+                    <a href="{% url 'store:profile' %}">{{ user.username }}</a>
+
+                    <!-- FIXED LOGOUT -->
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="
+                            background:none;
+                            border:none;
+                            cursor:pointer;
+                            color:inherit;
+                            font:inherit;
+                            padding:0;
+                            margin:0 10px;
+                        ">
+                            Logout
+                        </button>
+                    </form>
+
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'store:register' %}">Register</a>
+                {% endif %}
+
+                <a href="{% url 'store:cart' %}" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">{{ cart_count }}</span>
+                </a>
+
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 ModernStore. All rights reserved.</p>
+        <p>Built with Django | Secure Shopping</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
