@@ -6,7 +6,7 @@ A modern and responsive full-stack E-Commerce web application built with Django.
 
 ## 🌐 Live Demo
 
-Coming Soon
+https://prawin-modernstore.onrender.com
 
 ---
 
