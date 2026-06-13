@@ -156,32 +156,57 @@ The application is fully responsive and works on:
 # 📂 Project Structure
 
 ```text
-ecommerce/
+📂 ecommerce
 │
-├── ecommerce/
+├── 📂 ecommerce
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py
+│   └── asgi.py
 │
-├── store/
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   ├── urls.py
-│   ├── signals.py
+├── 📂 store
+│   ├── admin.py
+│   ├── apps.py
 │   ├── context_processors.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── signals.py
+│   ├── urls.py
+│   ├── views.py
+│   └── 📂 migrations
 │
-├── templates/
+├── 📂 templates
+│   ├── base.html
+│   │
+│   ├── 📂 store
+│   │   ├── home.html
+│   │   ├── product_list.html
+│   │   ├── product_detail.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   ├── order_history.html
+│   │   ├── order_detail.html
+│   │   └── profile.html
+│   │
+│   └── 📂 registration
+│       ├── login.html
+│       └── register.html
 │
-├── static/
-│   ├── css/
-│   ├── js/
+├── 📂 static
+│   ├── 📂 css
+│   │   └── main.css
+│   │
+│   └── 📂 js
+│       ├── main.js
+│       └── cart.js
 │
-├── media/
+├── 📂 media
+│   └── 📂 products
 │
 ├── manage.py
-│
-└── requirements.txt
+├── requirements.txt
+├── README.md
+└── db.sqlite3
 ```
 
 ---
