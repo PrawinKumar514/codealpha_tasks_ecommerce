@@ -10,7 +10,9 @@ https://prawin-modernstore.onrender.com
 
 ---
 
-## 📸 Screenshots
+## 👤 Admin login
+
+https://prawin-modernstore.onrender.com/admin/
 
 ### 🏠 Home Page
 - Product listing
